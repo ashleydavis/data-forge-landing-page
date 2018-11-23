@@ -66,14 +66,26 @@
 <h3 id="install">Install</h3>
 <p>Node.js:</p>
 <pre><code>npm install --save data-forge</code></pre>
+<p>To read and write files in Node.js:</p>
+<pre><code>npm install --save data-forge-fs</code></pre>
+<p>To plot charts in Node.js:</p>
+<pre><code>npm install --save data-forge-plot</code></pre>
 <p>Browser:</p>
 <pre><code>bower install --save data-forge</code></pre>
+
 <p><a href="https://github.com/data-forge/data-forge-ts/archive/master.zip">Download from Github</a></p>
 
 
 
 <h3 id="import">Import</h3>
 <pre><code class="language-js"><span class="keyword">var</span> dataForge = require(<span class="string">'data-forge'</span>);</code></pre>
+
+<p>To read and file writes:</p>
+<pre><code class="language-js">require(<span class="string">'data-forge-fs'</span>);</code></pre>
+
+<p>To plot charts:</p>
+<pre><code class="language-js">require(<span class="string">'data-forge-plot'</span>);</code></pre>
+
 <h3 id="transform-data-files">Transform CSV data files</h3>
 <pre><code class="language-js">dataForge.readFileSync(<span class="string">'input.csv'</span>)     <span class="comment">// Read input file.</span>
     .parseCSV()                         <span class="comment">// Parse CSV data to a dataframe. </span>
@@ -122,6 +134,10 @@ const transformedData = new dataForge.DataFrame(inputData)
 
 salesData.asCSV().writeFileSync(<span class="string">'sales-by-client.csv'</span>);</code></pre>
 <p><a href="https://www.npmjs.com/package/data-forge">And much more...</a></p>
+
+<p>Plot charts:</p>
+<pre><code class="language-js">salesData.plot().renderImage("my-chart.png");</code></pre>
+
 
 <p>You can support Data-Forge <a href="http://bit.ly/2t2cJu2" target="_blank">by buying Data Wrangling with JavaScript</a>.</p>
 
