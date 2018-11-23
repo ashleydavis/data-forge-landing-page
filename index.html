@@ -87,7 +87,7 @@
 <pre><code class="language-js">require(<span class="string">'data-forge-plot'</span>);</code></pre>
 
 <h3 id="transform-data-files">Transform CSV data files</h3>
-<pre><code class="language-js">dataForge.readFileSync(<span class="string">'input.csv'</span>)     <span class="comment">// Read input file.</span>
+<pre><code class="language-js">dataForge.readFileSync(<span class="string">"input.csv"</span>)     <span class="comment">// Read input file.</span>
     .parseCSV()                         <span class="comment">// Parse CSV data to a dataframe. </span>
     .parseInts(<span class="string">"Column2"</span>, <span class="string">"Column3"</span>)    <span class="comment">// Parse from strings to integers.</span>
     .parseDates(<span class="string">"Column4"</span>)              <span class="comment">// Parse from strings to date objects.</span>
@@ -95,17 +95,17 @@
     .where(row =&gt; predicate(row))       <span class="comment">// Filter out rows that you don't want.</span>
     .select(row =&gt; transform(row))      <span class="comment">// Apply transformation to each row.</span>
     .asCSV()                            <span class="comment">// Write out data file in CSV (or other) format.</span>
-    .writeFileSync(<span class="string">'output.csv'</span>);       <span class="comment">// Write output file.</span></code></pre>
+    .writeFileSync(<span class="string">"output.csv"</span>);       <span class="comment">// Write output file.</span></code></pre>
 
     <h3 id="transform-data-files">Transform JSON data files</h3>
-<pre><code class="language-js">dataForge.readFileSync(<span class="string">'input.json'</span>)     <span class="comment">    // Read input file.</span>
+<pre><code class="language-js">dataForge.readFileSync(<span class="string">"input.json"</span>)     <span class="comment">    // Read input file.</span>
         .parseJSON()                         <span class="comment">// Parse JSON data to a dataframe. </span>
         .parseDates(<span class="string">"Column4"</span>)              <span class="comment"> // Parse from strings to date objects.</span>
         .dropSeries(<span class="string">"Column5"</span>)              <span class="comment"> // Don't want column 5.</span>
         .where(row =&gt; predicate(row))       <span class="comment"> // Filter out rows that you don't want.</span>
         .select(row =&gt; transform(row))      <span class="comment"> // Apply transformation to each row.</span>
         .asJSON()                            <span class="comment">// Write out data file in CSV (or other) format.</span>
-        .writeFileSync(<span class="string">'output.json'</span>);       <span class="comment">// Write output file.</span></code></pre>
+        .writeFileSync(<span class="string">"output.json"</span>);       <span class="comment">// Write output file.</span></code></pre>
 
 <h3 id="transform-data-files">Transform any old JavaScript data!!</h3>
 <pre><code class="language-js">const inputData = [ /* a JavaScript array of data records */ ];
@@ -117,7 +117,7 @@ const transformedData = new dataForge.DataFrame(inputData)
 
 
 <h3 id="sort-aggregate-and-analyse-your-data">Sort, aggregate and analyse your data</h3>
-<pre><code class="language-js"><span class="keyword">var</span> salesData = dataForge.readFileSync(<span class="string">'sales.csv'</span>)
+<pre><code class="language-js"><span class="keyword">var</span> salesData = dataForge.readFileSync(<span class="string">"sales.csv"</span>)
     .asCSV()
     .parseDates(<span class="string">"Date"</span>)
     .parseFloats(<span class="string">"Sales"</span>);
@@ -132,12 +132,12 @@ const transformedData = new dataForge.DataFrame(inputData)
     }))
     .inflate();                                             <span class="comment">// Series -&gt; dataframe.</span>
 
-salesData.asCSV().writeFileSync(<span class="string">'sales-by-client.csv'</span>);</code></pre>
-<p><a href="https://www.npmjs.com/package/data-forge">And much more...</a></p>
+salesData.asCSV().writeFileSync(<span class="string">"sales-by-client.csv"</span>);</code></pre>
 
 <p>Plot charts:</p>
-<pre><code class="language-js">salesData.plot().renderImage("my-chart.png");</code></pre>
+<pre><code class="language-js">salesData.plot().renderImage(<span class="string"></span>"my-chart.png"</span>);</code></pre>
 
+<p><a href="https://www.npmjs.com/package/data-forge">And much more...</a></p>
 
 <p>You can support Data-Forge <a href="http://bit.ly/2t2cJu2" target="_blank">by buying Data Wrangling with JavaScript</a>.</p>
 
