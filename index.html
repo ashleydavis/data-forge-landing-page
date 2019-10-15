@@ -100,56 +100,56 @@
 
                 <p>To plot charts:</p>
                 <pre><code class="language-js">require(<span class="string">'data-forge-plot'</span>);
-                require(<span class="string">'@data-forge-plot/render'</span>);
+require(<span class="string">'@data-forge-plot/render'</span>);
                 </code></pre>
 
                 <h3 id="transform-data-files">Transform CSV data files</h3>
                 <pre><code class="language-js">dataForge.readFileSync(<span class="string">"input.csv"</span>)     <span class="comment">// Read input file.</span>
-                    .parseCSV()                         <span class="comment">// Parse CSV data to a dataframe. </span>
-                    .parseInts(<span class="string">"Column2"</span>, <span class="string">"Column3"</span>)    <span class="comment">// Parse from strings to integers.</span>
-                    .parseDates(<span class="string">"Column4"</span>)              <span class="comment">// Parse from strings to date objects.</span>
-                    .dropSeries(<span class="string">"Column5"</span>)              <span class="comment">// Don't want column 5.</span>
-                    .where(row =&gt; predicate(row))       <span class="comment">// Filter out rows that you don't want.</span>
-                    .select(row =&gt; transform(row))      <span class="comment">// Apply transformation to each row.</span>
-                    .asCSV()                            <span class="comment">// Write out data file in CSV (or other) format.</span>
-                    .writeFileSync(<span class="string">"output.csv"</span>);       <span class="comment">// Write output file.</span></code></pre>
+    .parseCSV()                         <span class="comment">// Parse CSV data to a dataframe. </span>
+    .parseInts(<span class="string">"Column2"</span>, <span class="string">"Column3"</span>)    <span class="comment">// Parse from strings to integers.</span>
+    .parseDates(<span class="string">"Column4"</span>)              <span class="comment">// Parse from strings to date objects.</span>
+    .dropSeries(<span class="string">"Column5"</span>)              <span class="comment">// Don't want column 5.</span>
+    .where(row =&gt; predicate(row))       <span class="comment">// Filter out rows that you don't want.</span>
+    .select(row =&gt; transform(row))      <span class="comment">// Apply transformation to each row.</span>
+    .asCSV()                            <span class="comment">// Write out data file in CSV (or other) format.</span>
+    .writeFileSync(<span class="string">"output.csv"</span>);       <span class="comment">// Write output file.</span></code></pre>
 
                     <h3 id="transform-data-files">Transform JSON data files</h3>
                 <pre><code class="language-js">dataForge.readFileSync(<span class="string">"input.json"</span>)     <span class="comment">    // Read input file.</span>
-                        .parseJSON()                         <span class="comment">// Parse JSON data to a dataframe. </span>
-                        .parseDates(<span class="string">"Column4"</span>)              <span class="comment"> // Parse from strings to date objects.</span>
-                        .dropSeries(<span class="string">"Column5"</span>)              <span class="comment"> // Don't want column 5.</span>
-                        .where(row =&gt; predicate(row))       <span class="comment"> // Filter out rows that you don't want.</span>
-                        .select(row =&gt; transform(row))      <span class="comment"> // Apply transformation to each row.</span>
-                        .asJSON()                            <span class="comment">// Write out data file in CSV (or other) format.</span>
-                        .writeFileSync(<span class="string">"output.json"</span>);       <span class="comment">// Write output file.</span></code></pre>
+    .parseJSON()                         <span class="comment">// Parse JSON data to a dataframe. </span>
+    .parseDates(<span class="string">"Column4"</span>)              <span class="comment"> // Parse from strings to date objects.</span>
+    .dropSeries(<span class="string">"Column5"</span>)              <span class="comment"> // Don't want column 5.</span>
+    .where(row =&gt; predicate(row))       <span class="comment"> // Filter out rows that you don't want.</span>
+    .select(row =&gt; transform(row))      <span class="comment"> // Apply transformation to each row.</span>
+    .asJSON()                            <span class="comment">// Write out data file in CSV (or other) format.</span>
+    .writeFileSync(<span class="string">"output.json"</span>);       <span class="comment">// Write output file.</span></code></pre>
 
                 <h3 id="transform-data-files">Transform any old JavaScript data!!</h3>
                 <pre><code class="language-js">const inputData = [ /* a JavaScript array of data records */ ];
-                const transformedData = new dataForge.DataFrame(inputData)
-                        .dropSeries(<span class="string">"Column5"</span>)              <span class="comment"> // Don't want column 5.</span>
-                        .where(row =&gt; predicate(row))       <span class="comment"> // Filter out rows that you don't want.</span>
-                        .select(row =&gt; transform(row))      <span class="comment"> // Apply transformation to each row.</span>
-                        .toArray()                           <span class="comment">// Back to normal JavaScript data!.</span></code></pre>
+const transformedData = new dataForge.DataFrame(inputData)
+    .dropSeries(<span class="string">"Column5"</span>)              <span class="comment"> // Don't want column 5.</span>
+    .where(row =&gt; predicate(row))       <span class="comment"> // Filter out rows that you don't want.</span>
+    .select(row =&gt; transform(row))      <span class="comment"> // Apply transformation to each row.</span>
+    .toArray()                           <span class="comment">// Back to normal JavaScript data!.</span></code></pre>
 
 
                 <h3 id="sort-aggregate-and-analyse-your-data">Sort, aggregate and analyse your data</h3>
                 <pre><code class="language-js"><span class="keyword">var</span> salesData = dataForge.readFileSync(<span class="string">"sales.csv"</span>)
-                    .asCSV()
-                    .parseDates(<span class="string">"Date"</span>)
-                    .parseFloats(<span class="string">"Sales"</span>);
+    .asCSV()
+    .parseDates(<span class="string">"Date"</span>)
+    .parseFloats(<span class="string">"Sales"</span>);
 
                 <span class="keyword">var</span> summmarized = salesData
-                    .orderBy(row =&gt; row.Date)                               <span class="comment">// Sort by date.</span>
-                    .groupBy(row =&gt; row.ClientName)                         <span class="comment">// Group by client.</span>
-                    .select(group =&gt; ({                                     <span class="comment">// Aggregate sales per client.</span>
-                        ClientName: group.first().ClientName,
-                        Average: group.select(row =&gt; row.Sales).average(),  <span class="comment">// Average sales per client.</span>
-                        Total: group.select(row =&gt; row.Sales).sum(),        <span class="comment">// Sum sales per client.</span>
-                    }))
-                    .inflate();                                             <span class="comment">// Series -&gt; dataframe.</span>
+    .orderBy(row =&gt; row.Date)                               <span class="comment">// Sort by date.</span>
+    .groupBy(row =&gt; row.ClientName)                         <span class="comment">// Group by client.</span>
+    .select(group =&gt; ({                                     <span class="comment">// Aggregate sales per client.</span>
+        ClientName: group.first().ClientName,
+        Average: group.select(row =&gt; row.Sales).average(),  <span class="comment">// Average sales per client.</span>
+        Total: group.select(row =&gt; row.Sales).sum(),        <span class="comment">// Sum sales per client.</span>
+    }))
+    .inflate();                                             <span class="comment">// Series -&gt; dataframe.</span>
 
-                salesData.asCSV().writeFileSync(<span class="string">"sales-by-client.csv"</span>);</code></pre>
+    salesData.asCSV().writeFileSync(<span class="string">"sales-by-client.csv"</span>);</code></pre>
 
                 <h3 id="import">Plot your data to charts</h3>
                 <pre><code class="language-js">salesData.plot().renderImage(<span class="string"></span>"my-chart.png"</span>);</code></pre>
