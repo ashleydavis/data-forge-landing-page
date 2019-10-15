@@ -91,7 +91,7 @@
                 <p><a href="https://github.com/data-forge/data-forge-ts/archive/master.zip">Download from Github</a></p>
 
                 <h3 id="import">Import</h3>
-                <pre><code class="language-js"><span class="keyword">var</span> dataForge = require(<span class="string">'data-forge'</span>);</code></pre>
+                <pre><code class="language-js"><span class="keyword">const</span> dataForge = require(<span class="string">'data-forge'</span>);</code></pre>
 
                 <p>To read and write files:</p>
                 <pre><code class="language-js">require(<span class="string">'data-forge-fs'</span>);</code></pre>
@@ -132,12 +132,12 @@ const transformedData = new dataForge.DataFrame(inputData)
 
 
                 <h3 id="sort-aggregate-and-analyse-your-data">Sort, aggregate and analyse your data</h3>
-                <pre><code class="language-js"><span class="keyword">var</span> salesData = dataForge.readFileSync(<span class="string">"sales.csv"</span>)
+                <pre><code class="language-js"><span class="keyword">const</span> salesData = dataForge.readFileSync(<span class="string">"sales.csv"</span>)
     .asCSV()
     .parseDates(<span class="string">"Date"</span>)
     .parseFloats(<span class="string">"Sales"</span>);
 
-<span class="keyword">var</span> summmarized = salesData
+<span class="keyword">const</span> summmarized = salesData
     .orderBy(row =&gt; row.Date)                               <span class="comment">// Sort by date.</span>
     .groupBy(row =&gt; row.ClientName)                         <span class="comment">// Group by client.</span>
     .select(group =&gt; ({                                     <span class="comment">// Aggregate sales per client.</span>
@@ -147,10 +147,10 @@ const transformedData = new dataForge.DataFrame(inputData)
     }))
     .inflate();                                             <span class="comment">// Series -&gt; dataframe.</span>
 
-    salesData.asCSV().writeFileSync(<span class="string">"sales-by-client.csv"</span>);</code></pre>
+salesData.asCSV().writeFileSync(<span class="string">"sales-by-client.csv"</span>);</code></pre>
 
                 <h3 id="import">Plot your data to charts</h3>
-                <pre><code class="language-js">salesData.plot().renderImage(<span class="string"></span>"my-chart.png"</span>);</code></pre>
+                <pre><code class="language-js">salesData.plot().renderImage(<span class="string">"my-chart.png"</span>);</code></pre>
 
                 <p><a href="https://www.npmjs.com/package/data-forge">And much more...</a></p>
 
