@@ -137,7 +137,7 @@ const transformedData = new dataForge.DataFrame(inputData)
     .parseDates(<span class="string">"Date"</span>)
     .parseFloats(<span class="string">"Sales"</span>);
 
-                <span class="keyword">var</span> summmarized = salesData
+<span class="keyword">var</span> summmarized = salesData
     .orderBy(row =&gt; row.Date)                               <span class="comment">// Sort by date.</span>
     .groupBy(row =&gt; row.ClientName)                         <span class="comment">// Group by client.</span>
     .select(group =&gt; ({                                     <span class="comment">// Aggregate sales per client.</span>
