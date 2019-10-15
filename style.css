@@ -468,7 +468,7 @@ footer p {
     margin: 0 2px
 }
 .page-index {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 20px
 }
@@ -486,3 +486,9 @@ footer p {
     border: 1px solid white
 }
 
+
+.dfn-ad {
+    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+}

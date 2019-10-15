@@ -4,8 +4,9 @@
 	<head>
 		<meta charset="utf-8" />
 
-		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="style.css" />
+		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Noto+Sans|Raleway' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="tailwind.css" />
+        <link rel="stylesheet" href="style.css" />
 		<link rel="shortcut icon" href="favicon.png" />
 
 		<title>Data-Forge</title>
@@ -59,113 +60,174 @@
 			</div>
 		</nav>
 
-<header class="hero">
-	<div class="centered">
-		<div class="hero-circle">
-			<img src="anvil-24236_640.png"/>
-		</div>
+        <header class="hero">
+            <div class="centered">
+                <div class="hero-circle">
+                    <img src="anvil-24236_640.png"/>
+                </div>
 
-		<div class="hero-title">
-			<h1>Data-Forge</h1>
-			<h2>JavaScript data wrangling, transformation and analysis toolkit</h2>
-		</div>
-	</div>
-</header>
+                <div class="hero-title">
+                    <h1>Data-Forge</h1>
+                    <h2>JavaScript data wrangling, transformation and analysis toolkit</h2>
+                </div>
+            </div>
+        </header>
 
-<div class="page-index">
+        <div class="page-index flex flex-wrap">
 
-<p>Want to learn JavaScript data wrangling and analysis? <a href="http://bit.ly/2t2cJu2" target="_blank">Then buy the book on it</a>.</p>
+            <div class="w-full md:w-3/4 lg:w-3/4 xl:w-3/4 pr-8">
 
-<p>
-    Do your prototyping and exploratory data analysis in JavaScript with <a href="http://www.data-forge-notebook.com/">Data-Forge Notebook</a>
-</p>
+                <h3 id="install">Install</h3>
+                <p>Node.js:</p>
+                <pre><code>npm install --save data-forge</code></pre>
+                <p>To read and write files in Node.js:</p>
+                <pre><code>npm install --save data-forge-fs</code></pre>
+                <p>To plot charts in Node.js:</p>
+                <pre><code>npm install --save data-forge-plot @data-forge-plot/render</code></pre>
 
-<p>Data-Forge TypeScript is here! <a href="https://github.com/data-forge/data-forge-ts"  target="_blank">Show support by adding a <em>star</em> to the repo</a>.</p>
+                <p><a href="https://github.com/data-forge/data-forge-ts/archive/master.zip">Download from Github</a></p>
 
+                <h3 id="import">Import</h3>
+                <pre><code class="language-js"><span class="keyword">var</span> dataForge = require(<span class="string">'data-forge'</span>);</code></pre>
 
-<h3 id="install">Install</h3>
-<p>Node.js:</p>
-<pre><code>npm install --save data-forge</code></pre>
-<p>To read and write files in Node.js:</p>
-<pre><code>npm install --save data-forge-fs</code></pre>
-<p>To plot charts in Node.js:</p>
-<pre><code>npm install --save data-forge-plot @data-forge-plot/render</code></pre>
+                <p>To read and write files:</p>
+                <pre><code class="language-js">require(<span class="string">'data-forge-fs'</span>);</code></pre>
 
-<p><a href="https://github.com/data-forge/data-forge-ts/archive/master.zip">Download from Github</a></p>
+                <p>To plot charts:</p>
+                <pre><code class="language-js">require(<span class="string">'data-forge-plot'</span>);
+                require(<span class="string">'@data-forge-plot/render'</span>);
+                </code></pre>
 
+                <h3 id="transform-data-files">Transform CSV data files</h3>
+                <pre><code class="language-js">dataForge.readFileSync(<span class="string">"input.csv"</span>)     <span class="comment">// Read input file.</span>
+                    .parseCSV()                         <span class="comment">// Parse CSV data to a dataframe. </span>
+                    .parseInts(<span class="string">"Column2"</span>, <span class="string">"Column3"</span>)    <span class="comment">// Parse from strings to integers.</span>
+                    .parseDates(<span class="string">"Column4"</span>)              <span class="comment">// Parse from strings to date objects.</span>
+                    .dropSeries(<span class="string">"Column5"</span>)              <span class="comment">// Don't want column 5.</span>
+                    .where(row =&gt; predicate(row))       <span class="comment">// Filter out rows that you don't want.</span>
+                    .select(row =&gt; transform(row))      <span class="comment">// Apply transformation to each row.</span>
+                    .asCSV()                            <span class="comment">// Write out data file in CSV (or other) format.</span>
+                    .writeFileSync(<span class="string">"output.csv"</span>);       <span class="comment">// Write output file.</span></code></pre>
 
+                    <h3 id="transform-data-files">Transform JSON data files</h3>
+                <pre><code class="language-js">dataForge.readFileSync(<span class="string">"input.json"</span>)     <span class="comment">    // Read input file.</span>
+                        .parseJSON()                         <span class="comment">// Parse JSON data to a dataframe. </span>
+                        .parseDates(<span class="string">"Column4"</span>)              <span class="comment"> // Parse from strings to date objects.</span>
+                        .dropSeries(<span class="string">"Column5"</span>)              <span class="comment"> // Don't want column 5.</span>
+                        .where(row =&gt; predicate(row))       <span class="comment"> // Filter out rows that you don't want.</span>
+                        .select(row =&gt; transform(row))      <span class="comment"> // Apply transformation to each row.</span>
+                        .asJSON()                            <span class="comment">// Write out data file in CSV (or other) format.</span>
+                        .writeFileSync(<span class="string">"output.json"</span>);       <span class="comment">// Write output file.</span></code></pre>
 
-<h3 id="import">Import</h3>
-<pre><code class="language-js"><span class="keyword">var</span> dataForge = require(<span class="string">'data-forge'</span>);</code></pre>
-
-<p>To read and write files:</p>
-<pre><code class="language-js">require(<span class="string">'data-forge-fs'</span>);</code></pre>
-
-<p>To plot charts:</p>
-<pre><code class="language-js">require(<span class="string">'data-forge-plot'</span>);
-require(<span class="string">'@data-forge-plot/render'</span>);
-</code></pre>
-
-<h3 id="transform-data-files">Transform CSV data files</h3>
-<pre><code class="language-js">dataForge.readFileSync(<span class="string">"input.csv"</span>)     <span class="comment">// Read input file.</span>
-    .parseCSV()                         <span class="comment">// Parse CSV data to a dataframe. </span>
-    .parseInts(<span class="string">"Column2"</span>, <span class="string">"Column3"</span>)    <span class="comment">// Parse from strings to integers.</span>
-    .parseDates(<span class="string">"Column4"</span>)              <span class="comment">// Parse from strings to date objects.</span>
-    .dropSeries(<span class="string">"Column5"</span>)              <span class="comment">// Don't want column 5.</span>
-    .where(row =&gt; predicate(row))       <span class="comment">// Filter out rows that you don't want.</span>
-    .select(row =&gt; transform(row))      <span class="comment">// Apply transformation to each row.</span>
-    .asCSV()                            <span class="comment">// Write out data file in CSV (or other) format.</span>
-    .writeFileSync(<span class="string">"output.csv"</span>);       <span class="comment">// Write output file.</span></code></pre>
-
-    <h3 id="transform-data-files">Transform JSON data files</h3>
-<pre><code class="language-js">dataForge.readFileSync(<span class="string">"input.json"</span>)     <span class="comment">    // Read input file.</span>
-        .parseJSON()                         <span class="comment">// Parse JSON data to a dataframe. </span>
-        .parseDates(<span class="string">"Column4"</span>)              <span class="comment"> // Parse from strings to date objects.</span>
-        .dropSeries(<span class="string">"Column5"</span>)              <span class="comment"> // Don't want column 5.</span>
-        .where(row =&gt; predicate(row))       <span class="comment"> // Filter out rows that you don't want.</span>
-        .select(row =&gt; transform(row))      <span class="comment"> // Apply transformation to each row.</span>
-        .asJSON()                            <span class="comment">// Write out data file in CSV (or other) format.</span>
-        .writeFileSync(<span class="string">"output.json"</span>);       <span class="comment">// Write output file.</span></code></pre>
-
-<h3 id="transform-data-files">Transform any old JavaScript data!!</h3>
-<pre><code class="language-js">const inputData = [ /* a JavaScript array of data records */ ];
-const transformedData = new dataForge.DataFrame(inputData)
-        .dropSeries(<span class="string">"Column5"</span>)              <span class="comment"> // Don't want column 5.</span>
-        .where(row =&gt; predicate(row))       <span class="comment"> // Filter out rows that you don't want.</span>
-        .select(row =&gt; transform(row))      <span class="comment"> // Apply transformation to each row.</span>
-        .toArray()                           <span class="comment">// Back to normal JavaScript data!.</span></code></pre>
+                <h3 id="transform-data-files">Transform any old JavaScript data!!</h3>
+                <pre><code class="language-js">const inputData = [ /* a JavaScript array of data records */ ];
+                const transformedData = new dataForge.DataFrame(inputData)
+                        .dropSeries(<span class="string">"Column5"</span>)              <span class="comment"> // Don't want column 5.</span>
+                        .where(row =&gt; predicate(row))       <span class="comment"> // Filter out rows that you don't want.</span>
+                        .select(row =&gt; transform(row))      <span class="comment"> // Apply transformation to each row.</span>
+                        .toArray()                           <span class="comment">// Back to normal JavaScript data!.</span></code></pre>
 
 
-<h3 id="sort-aggregate-and-analyse-your-data">Sort, aggregate and analyse your data</h3>
-<pre><code class="language-js"><span class="keyword">var</span> salesData = dataForge.readFileSync(<span class="string">"sales.csv"</span>)
-    .asCSV()
-    .parseDates(<span class="string">"Date"</span>)
-    .parseFloats(<span class="string">"Sales"</span>);
+                <h3 id="sort-aggregate-and-analyse-your-data">Sort, aggregate and analyse your data</h3>
+                <pre><code class="language-js"><span class="keyword">var</span> salesData = dataForge.readFileSync(<span class="string">"sales.csv"</span>)
+                    .asCSV()
+                    .parseDates(<span class="string">"Date"</span>)
+                    .parseFloats(<span class="string">"Sales"</span>);
 
-<span class="keyword">var</span> summmarized = salesData
-    .orderBy(row =&gt; row.Date)                               <span class="comment">// Sort by date.</span>
-    .groupBy(row =&gt; row.ClientName)                         <span class="comment">// Group by client.</span>
-    .select(group =&gt; ({                                     <span class="comment">// Aggregate sales per client.</span>
-        ClientName: group.first().ClientName,
-        Average: group.select(row =&gt; row.Sales).average(),  <span class="comment">// Average sales per client.</span>
-        Total: group.select(row =&gt; row.Sales).sum(),        <span class="comment">// Sum sales per client.</span>
-    }))
-    .inflate();                                             <span class="comment">// Series -&gt; dataframe.</span>
+                <span class="keyword">var</span> summmarized = salesData
+                    .orderBy(row =&gt; row.Date)                               <span class="comment">// Sort by date.</span>
+                    .groupBy(row =&gt; row.ClientName)                         <span class="comment">// Group by client.</span>
+                    .select(group =&gt; ({                                     <span class="comment">// Aggregate sales per client.</span>
+                        ClientName: group.first().ClientName,
+                        Average: group.select(row =&gt; row.Sales).average(),  <span class="comment">// Average sales per client.</span>
+                        Total: group.select(row =&gt; row.Sales).sum(),        <span class="comment">// Sum sales per client.</span>
+                    }))
+                    .inflate();                                             <span class="comment">// Series -&gt; dataframe.</span>
 
-salesData.asCSV().writeFileSync(<span class="string">"sales-by-client.csv"</span>);</code></pre>
+                salesData.asCSV().writeFileSync(<span class="string">"sales-by-client.csv"</span>);</code></pre>
 
-<h3 id="import">Plot your data to charts</h3>
-<pre><code class="language-js">salesData.plot().renderImage(<span class="string"></span>"my-chart.png"</span>);</code></pre>
+                <h3 id="import">Plot your data to charts</h3>
+                <pre><code class="language-js">salesData.plot().renderImage(<span class="string"></span>"my-chart.png"</span>);</code></pre>
 
-<p><a href="https://www.npmjs.com/package/data-forge">And much more...</a></p>
+                <p><a href="https://www.npmjs.com/package/data-forge">And much more...</a></p>
 
-<p>You can support Data-Forge by buying  
-    <a href="https://www.data-forge-notebook.com/" target="_blank">Data-Forge Notebook</a> or
-    <a href="http://bit.ly/2t2cJu2" target="_blank">Data Wrangling with JavaScript</a>.
-</p>
+                <p>You can support Data-Forge by buying  
+                    <a href="https://www.data-forge-notebook.com/" target="_blank">Data-Forge Notebook</a> or
+                    <a href="http://bit.ly/2t2cJu2" target="_blank">Data Wrangling with JavaScript</a>.
+                </p>
+            </div>
 
-</div>
+            <div class="w-full md:w-1/4 lg:w-1/4 xl:w-1/4 mt-8">
+                <aside>
+                    <div class="text-lg text-black text-center"><b>Support</b> the developer</div>
 
+                    <div>
+                        <a 
+                            target="_blank"
+                            href="https://github.com/data-forge/data-forge-ts" 
+                            class="w-full text-center inline-block font-bold border rounded text-blue-500 border-white hover:text-blue-700 bg-white p-8 pt-3 pb-3"
+                            >
+                            Star the repo
+                        </a>
+                    </div>
+
+                    <div 
+                        class="flex flex-col items-center text-center border rounded p-4 mt-2 dfn-ad"
+                        style="background-color: #4182E4;"
+                        >
+                        <a 
+                            target="_blank"
+                            href="https://www.data-forge-notebook.com" 
+                            >
+                            <img 
+                                class="w-full" 
+                                src="dfn-logo.png" 
+                                alt="Data-Forge Notebook"
+                                >
+                        </a>
+                        <div class="text-sm mt-4 leading-normal">Exploratory coding, data analysis and visualization for JavaScript and TypeScript</div>
+                        <a 
+                            target="_blank"
+                            href="https://www.data-forge-notebook.com" 
+                            class="inline-block font-bold border rounded text-blue-500 border-white hover:text-blue-700 bg-white p-8 pt-3 pb-3 mt-4"
+                            >
+                            Learn more
+                        </a>
+                        <div class="text-sm mt-4 leading-snug">Limited availability <span class="font-bold">40% off</span> with discount code TDW201910</div>
+                    </div>
+                    <div 
+                        class="flex flex-col items-center text-center border rounded p-4 mt-8 dfn-ad"
+                        style="background-color: #01313F;"
+                        >
+                        <a 
+                            target="_blank"
+                            href="http://bit.ly/2t2cJu2" 
+                            >
+                            <img 
+                                class="w-full" 
+                                src="JSDW.png" 
+                                alt="Data Wrangling with JavaScript"
+                                >
+                        </a>
+                        <div class="text-sm mt-4 leading-normal">A practical and comprehensive guide to working with data in JavaScript</div>
+                        <a 
+                            target="_blank"
+                            href="http://bit.ly/2t2cJu2" 
+                            class="inline-block font-bold border rounded text-blue-500 border-white hover:text-blue-700 bg-white p-8 pt-3 pb-3 mt-4"
+                            >
+                            Learn more
+                        </a>
+                    </div>
+                
+                    <div class="mt-8 dfn-ad text-black">
+                        <div class="text-sm text-center">Be updated before anyone else...</div>
+                        <div>
+                            {% include subscribe.html %}
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
 
 		<footer>
 			<p style="color: black; text-align: center;">Data-Forge is distributed under the MIT license.</p>
