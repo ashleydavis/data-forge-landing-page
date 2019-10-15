@@ -115,6 +115,7 @@ nav ol {
     list-style-image: none
 }
 img {
+    width: 100%;
     border: 0;
     -ms-interpolation-mode: bicubic
 }
@@ -279,8 +280,8 @@ pre code {
     background: url(bg.png) 0 50%
 }
 .hero-circle {
-    width: 180px;
-    height: 180px;
+    max-width: 350px;
+    max-height: 350px;
     margin: 20px auto;
     position: relative;
     background: url(bg.png) 0 50%
@@ -350,7 +351,7 @@ pre code {
 }
 .hero-oneline h1,
 .hero-title h1 {
-    font-size: 60px;
+    font-size: 50px;
     margin: 0
 }
 .hero-oneline h1 span,
@@ -423,44 +424,15 @@ footer p {
     padding: 0 20px
 }
 .nav {
-    height: 60px;
-    background: #222;
     padding: 0 20px;
     font-family: 'Montserrat', sans-serif;
-    font-weight: 400
-}
-.nav-projects {
-    float: left
-}
-.nav-project {
-    display: block;
-    line-height: 30px;
-    padding: 15px 20px 15px 60px;
-    float: left;
-    position: relative;
-    text-decoration: none;
-    color: #fff;
-    width: 155px;
-    font-size: 14px;
-    text-transform: uppercase;
-    text-shadow: 0 1px 1px rgba(34, 34, 34, 0.3)
-}
-.nav-project svg {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 40px;
-    height: 40px
-}
-.nav-pages {
-    float: right;
-    padding: 15px 0
+    font-weight: 400;
+    background: #222;
 }
 .nav-pages a {
     display: inline-block;
     line-height: 30px;
     padding: 0 10px;
-    float: left;
     text-decoration: none;
     color: #fff;
     border-radius: 2px;
