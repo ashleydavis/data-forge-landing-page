@@ -429,6 +429,10 @@ footer p {
     font-weight: 400;
     background: #222;
 }
+.nav-pages {
+    width: 480px;
+    margin: 0 auto;
+}
 .nav-pages a {
     display: inline-block;
     line-height: 30px;
@@ -437,7 +441,7 @@ footer p {
     color: #fff;
     border-radius: 2px;
     font-size: 14px;
-    margin: 0 2px
+    margin: 0 2px;
 }
 .page-index {
     max-width: 1000px;
