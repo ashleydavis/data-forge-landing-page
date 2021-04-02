@@ -1,3 +1,3 @@
 # data-forge-landing-page
 
-DEFUNCT. This is replaced by a new repo in the DFN org.
+Code for the Data-Forge landing page.
